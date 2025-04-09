@@ -36,7 +36,13 @@ public class CardsController : ControllerBase
             return BadRequest("Balance cannot be negative.");
         }
 
+        if (await _cardService.CardExists(createCardDto.CardNumber))
+        {
+            return Conflict("A card with the given card number already exists.");
+        }
+
         Card card = await _cardService.CreateCard(createCardDto.CardNumber, createCardDto.Balance);
+
         return CreatedAtAction(nameof(GetCardBalance), new { cardNumber = card.CardNumber }, card);
     }
 

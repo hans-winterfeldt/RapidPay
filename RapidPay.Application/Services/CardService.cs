@@ -51,4 +51,10 @@ public class CardService : ICardService
 
         return card?.Balance ?? 0;
     }
+
+    // New method to validate if a card already exists
+    public async Task<bool> CardExists(string cardNumber)
+    {
+        return await Task.FromResult(_dbContext.Cards.Any(c => c.CardNumber == cardNumber));
+    }
 }

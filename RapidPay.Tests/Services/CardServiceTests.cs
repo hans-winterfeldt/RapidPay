@@ -37,8 +37,6 @@ public class CardServiceTests
         card.Balance.ShouldBe(initialBalance);
     }
 
-
-
     [Fact]
     public async Task ProcessPayment_ShouldDeductBalance()
     {
@@ -65,6 +63,42 @@ public class CardServiceTests
             .First(c => c.CardNumber == cardNumber);
 
         card.Balance.ShouldBe(780);
+    }
+
+    [Fact]
+    public async Task CardExists_ShouldReturnTrue_WhenCardExists()
+    {
+        // Arrange
+        string cardNumber = _faker.Random.Replace("###############");
+        Domain.Models.Card existingCard = new()
+        {
+            CardNumber = cardNumber,
+            Balance = _faker.Random.Decimal(1, 1000)
+        };
+        _dbContext.Cards.Add(existingCard);
+        await _dbContext.SaveChangesAsync();
+
+        CardService cardService = GetService();
+
+        // Act
+        bool exists = await cardService.CardExists(cardNumber);
+
+        // Assert
+        exists.ShouldBeTrue();
+    }
+
+    [Fact]
+    public async Task CardExists_ShouldReturnFalse_WhenCardDoesNotExist()
+    {
+        // Arrange
+        string cardNumber = _faker.Random.Replace("###############");
+        CardService cardService = GetService();
+
+        // Act
+        bool exists = await cardService.CardExists(cardNumber);
+
+        // Assert
+        exists.ShouldBeFalse();
     }
 
     private CardService GetService()

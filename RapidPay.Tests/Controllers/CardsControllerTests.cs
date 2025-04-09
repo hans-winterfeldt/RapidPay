@@ -87,6 +87,26 @@ public class CardsControllerTests
     }
 
     [Fact]
+    public async Task CreateCard_ShouldReturnConflict_WhenCardAlreadyExists()
+    {
+        // Arrange
+        var controller = GetController();
+        var existingCardDto = new CreateCardDto { CardNumber = "123456789012345", Balance = 100 };
+
+        // Simulate that the card already exists by returning null from the service
+        A.CallTo(() => _cardService.CardExists(existingCardDto.CardNumber))
+            .Returns(true);
+
+        // Act
+        var result = await controller.CreateCard(existingCardDto);
+
+        // Assert
+        result.ShouldBeOfType<ConflictObjectResult>();
+        var conflictResult = result as ConflictObjectResult;
+        conflictResult!.Value.ShouldBe("A card with the given card number already exists.");
+    }
+
+    [Fact]
     public async Task ProcessPayment_ShouldReturnBadRequest_WhenAmountIsZeroOrNegative()
     {
         // Arrange
