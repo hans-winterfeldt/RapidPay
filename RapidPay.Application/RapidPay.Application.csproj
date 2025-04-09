@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RapidPay.Domain\RapidPay.Domain.csproj" />
+    <ProjectReference Include="..\RapidPay.Infrastructure\RapidPay.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

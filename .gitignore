@@ -1,0 +1,52 @@
+##########################################
+# WARNING:
+# This file is managed in roofstock.convention.git and will overwrite "this" file in all other gits.
+# Changes must be Pull-Requested to roofstock.convention.git, which will be propagated to all other gits.
+##########################################
+
+# Binaries / Generated / Test Results / Temps
+App_Data/
+[Bb]in/
+[Oo]bj/
+[Gg]enerated/
+testbin/
+testobj/
+TestResults/
+_[Ww]orkingDir/
+
+# Backup files
+*.[Bb]ak
+*.[Oo]rig
+*.[Oo]riginal
+
+# Log files
+*.[Ll]og
+
+# User specific files
+_[Uu]ser*.*
+*.[Uu]ser
+*.gitignored/
+*.[Uu]ser[Ss]ecrets.json
+local.settings.json
+
+# NuGet Packages Directory
+[Pp]ackages/
+
+# NPM & Bower Packages
+node_modules/
+bower_components/
+chromedriver*.*
+
+# Visual Studio files
+.vs/
+*.jfm
+*.userprefs
+*.dbmdl
+
+# Visual Studio Code files
+.vscode/launch.json
+.vscode/tasks.json
+
+# Others
+*.Cache
+*.pdf
